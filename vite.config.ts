@@ -1,14 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { resolve } from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import usePluginImport from "vite-plugin-importer";
+import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    usePluginImport({
+      libraryName: "antd",
+      libraryDirectory: "es",
+      style: true,
+    }),
+  ],
   resolve: {
     alias: [
-      { find: new RegExp('^/@/'), replacement: `${resolve('src')}/` },
-      { find: new RegExp('^~'), replacement: '' },
-    ]
+      { find: new RegExp("^/@/"), replacement: `${resolve("src")}/` },
+      { find: new RegExp("^~"), replacement: "" },
+    ],
   },
   css: {
     preprocessorOptions: {
@@ -16,5 +24,5 @@ export default defineConfig({
         javascriptEnabled: true,
       },
     },
-  }
-})
+  },
+});
