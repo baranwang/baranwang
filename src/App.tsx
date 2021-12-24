@@ -8,7 +8,21 @@ import { experience, works } from "./data";
 import styles from "./app.module.less";
 import fullStackDesigner from "/@/data/assets/full-stack-designer.jpg";
 
+const Footer = () => {
+  return (
+    <footer>
+      <p>
+        <a href="mailto:me@baran.wang">me@baran.wang</a>
+        <br />
+        <a href="tel:+8618521081077">+86 185-2108-1077</a>
+      </p>
+    </footer>
+  );
+};
+
 function App() {
+  const name = "王柄涵 / Baran";
+
   const startTime = new Date("2014-03-08T00:00:00.000Z");
 
   const years = useMemo(
@@ -27,21 +41,17 @@ function App() {
     <div className={styles.app}>
       <Card flex>
         <h1>Baran's Resume</h1>
-        <p>王柄涵 · {years} · 全栈设计师 / UI 设计师 / 前端开发工程师</p>
-        <footer>
-          <p>
-            <a href="mailto:me@baran.wang">me@baran.wang</a>
-            <br />
-            <a href="tel:+8618521081077">+86 185-2108-1077</a>
-          </p>
-        </footer>
+        <p>
+          {name} · {years} · 全栈设计师 / UI 设计师 / 前端开发工程师
+        </p>
+        <Footer />
       </Card>
 
       <Card>
         <section>
           <h2>Hi~</h2>
           <p>
-            我是 <strong>王柄涵 / Baran</strong>，一名
+            我是 <strong>{name}</strong>，一名
             <Popover
               overlayClassName={styles["full-stack-designer"]}
               content={<img src={fullStackDesigner} />}>
@@ -125,13 +135,7 @@ function App() {
       <Card flex>
         <h1>THE END</h1>
         <p>THANKS FOR WATCH</p>
-        <footer>
-          <p>
-            <a href="mailto:me@baran.wang">me@baran.wang</a>
-            <br />
-            <a href="tel:+8618521081077">+86 185-2108-1077</a>
-          </p>
-        </footer>
+        <Footer />
       </Card>
     </div>
   );
