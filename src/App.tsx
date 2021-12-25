@@ -34,11 +34,7 @@ function App() {
     offlineReady: [offlineReady],
     needRefresh: [needRefresh],
     updateServiceWorker,
-  } = useRegisterSW({
-    onRegistered(r) {
-      console.log('SW registered', r);
-    },
-  });
+  } = useRegisterSW();
 
   useEffect(() => {
     if (offlineReady || needRefresh) {
