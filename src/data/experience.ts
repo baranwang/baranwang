@@ -24,7 +24,7 @@ export const experience = [
     endTime: "2016.12",
   },
   {
-    company: "平顶山学院",
+    company: "平顶山学院网络中心",
     title: "前端开发工程师（实习）",
     startTime: "2012.03",
     endTime: "2014.06",
