@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { minifyHtml, injectHtml } from 'vite-plugin-html'
 import usePluginImport from "vite-plugin-importer";
 import { VitePWA } from 'vite-plugin-pwa'
+import autoprefixer from 'autoprefixer'
 import { resolve } from "path";
 import { title, description } from './src/config'
 
@@ -40,5 +41,8 @@ export default defineConfig({
         javascriptEnabled: true,
       },
     },
+    postcss: {
+      plugins: [autoprefixer()]
+    }
   },
 });
