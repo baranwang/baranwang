@@ -11,6 +11,7 @@ import {
   description,
 } from './config';
 import { experience, works } from './data';
+import { Helmet } from 'react-helmet';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
 import styles from './app.module.less';
@@ -47,6 +48,9 @@ function App() {
 
   return (
     <div className={styles.app}>
+      <Helmet>
+        <link rel='preload' href={fullStackDesigner} as='image' />
+      </Helmet>
       <Card flex>
         <h1>{title}</h1>
         <p>{description}</p>
@@ -133,7 +137,7 @@ function App() {
                 }
                 return (
                   <Col {...colProps} key={image.src}>
-                    <Image src={image.src} />
+                    <Image src={image.src} placeholder={<Image preview={false} src={`${image.src}?imageMogr2/blur/50x5/grayscale/1/ignore-error/1`} />} />
                   </Col>
                 );
               })}

@@ -5,6 +5,7 @@ specifiers:
   '@types/react': ^17.0.33
   '@types/react-dom': ^17.0.10
   '@types/react-gtm-module': ^2.0.1
+  '@types/react-helmet': ^6.1.5
   '@vitejs/plugin-react': ^1.0.7
   antd: ^4.17.4
   autoprefixer: ^10.4.0
@@ -14,6 +15,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-gtm-module: ^2.0.11
+  react-helmet: ^6.1.0
   stylelint: ^14.2.0
   stylelint-config-standard: ^24.0.0
   stylelint-order: ^5.0.0
@@ -31,12 +33,14 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-gtm-module: 2.0.11
+  react-helmet: 6.1.0_react@17.0.2
 
 devDependencies:
   '@types/node': 17.0.4
   '@types/react': 17.0.38
   '@types/react-dom': 17.0.11
   '@types/react-gtm-module': 2.0.1
+  '@types/react-helmet': 6.1.5
   '@vitejs/plugin-react': 1.1.3
   autoprefixer: 10.4.0
   less: 4.1.2
@@ -1422,6 +1426,12 @@ packages:
 
   /@types/react-gtm-module/2.0.1:
     resolution: {integrity: sha512-T/DN9gAbCYk5wJ1nxf4pSwmXz4d1iVjM++OoG+mwMfz9STMAotGjSb65gJHOS5bPvl6vLSsJnuC+y/43OQrltg==}
+    dev: true
+
+  /@types/react-helmet/6.1.5:
+    resolution: {integrity: sha512-/ICuy7OHZxR0YCAZLNg9r7I9aijWUWvxaPR6uTuyxe8tAj5RL4Sw1+R6NhXUtOsarkGYPmaHdBDvuXh2DIN/uA==}
+    dependencies:
+      '@types/react': 17.0.38
     dev: true
 
   /@types/react/17.0.38:
@@ -3378,6 +3388,14 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /prop-types/15.8.0:
+    resolution: {integrity: sha512-fDGekdaHh65eI3lMi5OnErU6a8Ighg2KjcjQxO7m8VHyWjcPyj5kiOgV1LQDOOOgVy3+5FgjXvdSSX7B8/5/4g==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: false
+
   /prr/1.0.1:
     resolution: {integrity: sha1-0/wRS6BplaRexok/SEzrHXj19HY=}
     dev: true
@@ -3908,8 +3926,24 @@ packages:
       scheduler: 0.20.2
     dev: false
 
+  /react-fast-compare/3.2.0:
+    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
   /react-gtm-module/2.0.11:
     resolution: {integrity: sha512-8gyj4TTxeP7eEyc2QKawEuQoAZdjKvMY4pgWfycGmqGByhs17fR+zEBs0JUDq4US/l+vbTl+6zvUIx27iDo/Vw==}
+    dev: false
+
+  /react-helmet/6.1.0_react@17.0.2:
+    resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.8.0
+      react: 17.0.2
+      react-fast-compare: 3.2.0
+      react-side-effect: 2.1.1_react@17.0.2
     dev: false
 
   /react-is/16.13.1:
@@ -3920,6 +3954,14 @@ packages:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-side-effect/2.1.1_react@17.0.2:
+    resolution: {integrity: sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /react/17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
