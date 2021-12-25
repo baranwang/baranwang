@@ -1,49 +1,55 @@
-import { useMemo } from "react";
-import { Col, ColProps, Image, Popover, Row } from "antd";
-import { formatDistanceToNowStrict } from "date-fns";
-import { zhCN } from "date-fns/locale";
-import { Card } from "./components/Card";
-import { experience, works } from "./data";
+import { useEffect } from 'react';
+import { Col, ColProps, Image, Popover, Row } from 'antd';
+import { Card } from './components/Card';
+import {
+  title,
+  chineseName,
+  englishName,
+  email,
+  age,
+  years,
+  description,
+} from './config';
+import { experience, works } from './data';
+import { useRegisterSW } from 'virtual:pwa-register/react';
 
-import styles from "./app.module.less";
-import fullStackDesigner from "/@/data/assets/full-stack-designer.jpg";
+import styles from './app.module.less';
+import fullStackDesigner from '/@/data/assets/full-stack-designer.jpg';
 
 const Footer = () => {
   return (
     <footer>
       <p>
-        <a href="mailto:me@baran.wang">me@baran.wang</a>
+        <a href={`mailto:${email}`}>{email}</a>
         <br />
-        <a href="tel:+8618521081077">+86 185-2108-1077</a>
+        <a href='tel:+8618521081077'>+86 185-2108-1077</a>
       </p>
     </footer>
   );
 };
 
 function App() {
-  const name = "王柄涵 / Baran";
+  const {
+    offlineReady: [offlineReady],
+    needRefresh: [needRefresh],
+    updateServiceWorker,
+  } = useRegisterSW({
+    onRegistered(r) {
+      console.log('SW registered', r);
+    },
+  });
 
-  const startTime = new Date("2014-03-08T00:00:00.000Z");
-
-  const years = useMemo(
-    () => formatDistanceToNowStrict(startTime, { locale: zhCN }),
-    [startTime]
-  );
-
-  const birthday = new Date("1993-05-01T12:40:00.000Z");
-
-  const age = useMemo(
-    () => parseInt(formatDistanceToNowStrict(birthday, { unit: "year" })),
-    [birthday]
-  );
+  useEffect(() => {
+    if (offlineReady || needRefresh) {
+      updateServiceWorker();
+    }
+  }, [offlineReady, needRefresh]);
 
   return (
     <div className={styles.app}>
       <Card flex>
-        <h1>Baran's Resume</h1>
-        <p>
-          {name} · {years} · 全栈设计师 / UI 设计师 / 前端开发工程师
-        </p>
+        <h1>{title}</h1>
+        <p>{description}</p>
         <Footer />
       </Card>
 
@@ -51,9 +57,13 @@ function App() {
         <section>
           <h2>Hi~</h2>
           <p>
-            我是 <strong>{name}</strong>，一名
+            我是
+            <strong>
+              {chineseName} / {englishName}
+            </strong>
+            ，一名
             <Popover
-              overlayClassName={styles["full-stack-designer"]}
+              overlayClassName={styles['full-stack-designer']}
               content={<img src={fullStackDesigner} />}>
               <strong>全栈设计师</strong>
             </Popover>
@@ -62,12 +72,12 @@ function App() {
           <p>
             联系电话：
             <strong>
-              <a href="tel:+8618521081077">+86 185-2108-1077</a>
+              <a href='tel:+8618521081077'>+86 185-2108-1077</a>
             </strong>
-            {" · "}
+            {' · '}
             电子邮箱：
             <strong>
-              <a href="mailto:me@baran.wang">me@baran.wang</a>
+              <a href={`mailto:${email}`}>{email}</a>
             </strong>
           </p>
           <p>
@@ -105,7 +115,7 @@ function App() {
           {item.url && (
             <p>
               项目地址：
-              <a href={item.url} target="_blank">
+              <a href={item.url} target='_blank'>
                 {item.url}
               </a>
             </p>
@@ -114,7 +124,7 @@ function App() {
             <Row className={styles.images} gutter={[24, 24]}>
               {item.images.map((image) => {
                 const colProps: ColProps = {};
-                if (image.style === "block") {
+                if (image.style === 'block') {
                   colProps.span = 24;
                 } else {
                   colProps.lg = 8;
@@ -134,7 +144,7 @@ function App() {
 
       <Card flex>
         <h1>THE END</h1>
-        <p>THANKS FOR WATCH</p>
+        <p>THANKS FOR WATCHING</p>
         <Footer />
       </Card>
     </div>
