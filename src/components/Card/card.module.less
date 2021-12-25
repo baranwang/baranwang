@@ -13,7 +13,13 @@
       display: flex;
       flex: auto;
       flex-direction: column;
-      justify-content: end;
+      &::before {
+        flex: auto;
+        content: "";
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   section {
