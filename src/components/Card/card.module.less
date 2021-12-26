@@ -5,6 +5,10 @@
   border-radius: 8px;
   box-shadow: 0 0 8px fade(#000, 50%);
   page-break-after: always;
+  @media print {
+    padding: 0;
+    box-shadow: none;
+  }
   &-flex {
     display: flex;
     flex-direction: column;

@@ -1,11 +1,14 @@
-import classNames from "classnames";
-import styles from "./card.module.less";
+import classNames from 'classnames';
+import styles from './card.module.less';
 
 export const Card: React.FC<{
+  id?: string;
   flex?: boolean;
-}> = ({ children, flex }) => {
+}> = ({ id, flex, children }) => {
   return (
-    <div className={classNames(styles.card, { [styles["card-flex"]]: flex })}>
+    <div
+      id={id}
+      className={classNames(styles.card, { [styles['card-flex']]: flex })}>
       {children}
     </div>
   );
