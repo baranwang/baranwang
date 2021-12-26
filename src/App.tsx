@@ -56,7 +56,7 @@ function App() {
               <Anchor.Link
                 key={index}
                 href={`#works-${index}`}
-                title={work.title}
+                title={<span title={work.description}>{work.title}</span>}
               />
             ))}
           </Anchor.Link>
