@@ -13,8 +13,11 @@
   &-flex {
     display: flex;
     flex-direction: column;
-    min-height: calc(100% - 80rem);
+    height: calc(100% - 80rem);
+    min-height: 480px;
+    max-height: 720rem;
     @media print {
+      height: auto;
       min-height: auto;
       page-break-after: auto;
     }
