@@ -7,16 +7,24 @@
   page-break-after: always;
   @media print {
     padding: 0;
+    background-color: transparent;
     box-shadow: none;
   }
   &-flex {
     display: flex;
     flex-direction: column;
     min-height: calc(100% - 80rem);
+    @media print {
+      min-height: auto;
+      page-break-after: auto;
+    }
     footer {
       display: flex;
       flex: auto;
       flex-direction: column;
+      @media print {
+        display: none;
+      }
       &::before {
         flex: auto;
         content: "";

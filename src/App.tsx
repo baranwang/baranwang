@@ -147,6 +147,7 @@ function App() {
                     colProps.lg = 8;
                     colProps.md = 12;
                     colProps.sm = 24;
+                    colProps.className = styles['images-inline'];
                   }
                   return (
                     <Col {...colProps} key={image.src}>
