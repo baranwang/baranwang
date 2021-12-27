@@ -1,4 +1,4 @@
-import image from '../assets/pb-sans-condensed/1.svg'
+import image from '../assets/pb-sans-condensed/1.png'
 
 export const PBsansCondensed: Work = {
   title: 'PB Sans Condensed',

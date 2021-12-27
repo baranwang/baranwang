@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
+    "prebuild": "node pdf/index.mjs",
     "preview": "vite preview"
   },
   "author": {
@@ -11,6 +12,7 @@
     "email": "me@baran.wang"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^2.0.21",
     "antd": "^4.17.4",
     "classnames": "^2.3.1",
     "date-fns": "^2.27.0",
