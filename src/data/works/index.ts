@@ -1,6 +1,7 @@
 import { coolvox } from './coolvox'
 import { playara } from './playara'
 import { stardtb } from './stardtb'
+import { kanjianYuedianHardware } from './kanjian-yuedian-hardware'
 import { kanjianAndroid } from './kanjian-android'
 import { kanjianNow } from './kanjian-now'
 import { kanjianTV } from './kanjian-tv'
@@ -16,6 +17,7 @@ export const works = [
   coolvox,
   playara,
   stardtb,
+  kanjianYuedianHardware,
   kanjianAndroid,
   kanjianNow,
   kanjianTV,
