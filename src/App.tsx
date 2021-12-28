@@ -42,6 +42,17 @@ function App() {
     }
   }, [offlineReady, needRefresh]);
 
+  useEffect(() => {
+    const goToPdf = (e: Event) => {
+      e.preventDefault();
+      window.location.assign(`/${title}.pdf`);
+    };
+    window.addEventListener("beforeprint", goToPdf);
+    return () => {
+      window.removeEventListener("beforeprint", goToPdf);
+    };
+  }, []);
+
   return (
     <div className={styles.app}>
       <Helmet>
