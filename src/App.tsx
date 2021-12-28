@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { Anchor, Col, ColProps, Image, Popover, Row } from 'antd';
-import { Card } from './components/Card';
+import { useEffect } from "react";
+import { Anchor, Button, Col, ColProps, Image, Popover, Row } from "antd";
+import { Card } from "./components/Card";
 import {
   title,
   chineseName,
@@ -9,13 +9,13 @@ import {
   age,
   years,
   description,
-} from './config';
-import { experience, works } from './data';
-import { Helmet } from 'react-helmet';
-import { useRegisterSW } from 'virtual:pwa-register/react';
+} from "./config";
+import { experience, works } from "./data";
+import { Helmet } from "react-helmet";
+import { useRegisterSW } from "virtual:pwa-register/react";
 
-import styles from './app.module.less';
-import fullStackDesigner from '/@/data/assets/full-stack-designer.jpg';
+import styles from "./app.module.less";
+import fullStackDesigner from "/@/data/assets/full-stack-designer.jpg";
 
 const Footer = () => {
   return (
@@ -23,7 +23,7 @@ const Footer = () => {
       <p>
         <a href={`mailto:${email}`}>{email}</a>
         <br />
-        <a href='tel:+8618521081077'>+86 185-2108-1077</a>
+        <a href="tel:+8618521081077">+86 185-2108-1077</a>
       </p>
     </footer>
   );
@@ -45,13 +45,13 @@ function App() {
   return (
     <div className={styles.app}>
       <Helmet>
-        <link rel='preload' href={fullStackDesigner} as='image' />
+        <link rel="preload" href={fullStackDesigner} as="image" />
       </Helmet>
 
       <aside>
         <Anchor>
-          <Anchor.Link href='#profile' title='个人简介' />
-          <Anchor.Link href='#works' title='部分项目展示'>
+          <Anchor.Link href="#profile" title="个人简介" />
+          <Anchor.Link href="#works" title="部分项目展示">
             {works.map((work, index) => (
               <Anchor.Link
                 key={index}
@@ -69,7 +69,7 @@ function App() {
           <Footer />
         </Card>
 
-        <Card id='profile'>
+        <Card id="profile">
           <section>
             <h2>Hi~</h2>
             <p>
@@ -79,7 +79,7 @@ function App() {
               </strong>
               ，一名
               <Popover
-                overlayClassName={styles['full-stack-designer']}
+                overlayClassName={styles["full-stack-designer"]}
                 content={<img src={fullStackDesigner} />}>
                 <strong>全栈设计师</strong>
               </Popover>
@@ -88,9 +88,9 @@ function App() {
             <p>
               联系电话：
               <strong>
-                <a href='tel:+8618521081077'>+86 185-2108-1077</a>
+                <a href="tel:+8618521081077">+86 185-2108-1077</a>
               </strong>
-              {' · '}
+              {" · "}
               电子邮箱：
               <strong>
                 <a href={`mailto:${email}`}>{email}</a>
@@ -111,14 +111,14 @@ function App() {
             <h2>工作经历</h2>
             {experience.map((item) => (
               <p key={`${item.company}-${item.startTime}-${item.endTime}`}>
-                {item.startTime} ～ {item.endTime} · {item.company} ·{' '}
+                {item.startTime} ～ {item.endTime} · {item.company} ·{" "}
                 {item.title}
               </p>
             ))}
           </section>
         </Card>
 
-        <Card id='works' flex>
+        <Card id="works" flex>
           <h1>部分项目展示</h1>
           <footer>
             <p>SCROLL DOWN</p>
@@ -132,7 +132,7 @@ function App() {
             {item.url && (
               <p>
                 项目地址：
-                <a href={item.url} target='_blank'>
+                <a href={item.url} target="_blank">
                   {item.url}
                 </a>
               </p>
@@ -141,13 +141,13 @@ function App() {
               <Row className={styles.images} gutter={[24, 24]}>
                 {item.images.map((image) => {
                   const colProps: ColProps = {};
-                  if (image.style === 'block') {
+                  if (image.style === "block") {
                     colProps.span = 24;
                   } else {
                     colProps.lg = 8;
                     colProps.md = 12;
                     colProps.sm = 24;
-                    colProps.className = styles['images-inline'];
+                    colProps.className = styles["images-inline"];
                   }
                   return (
                     <Col {...colProps} key={image.src}>
@@ -174,6 +174,16 @@ function App() {
           <Footer />
         </Card>
       </main>
+
+      <footer className={styles.footer}>
+        <Button
+          type="primary"
+          size="large"
+          href={`${title}.pdf`}
+          download={`${description}.pdf`}>
+          下载 PDF
+        </Button>
+      </footer>
     </div>
   );
 }

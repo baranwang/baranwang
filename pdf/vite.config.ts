@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { builtinModules } from 'module';
+import { dependencies } from '../package.json'
 
 export default defineConfig({
   plugins: [
@@ -19,10 +20,11 @@ export default defineConfig({
       formats: ['cjs'],
     },
     rollupOptions: {
-      external: ['@react-pdf/renderer', 'react', 'sharp', ...builtinModules],
+      external: [...Object.keys(dependencies), ...builtinModules],
       output: {
-        entryFileNames: '[name].cjs',
+        entryFileNames: 'index.js',
       },
-    }
+    },
+    minify: false,
   }
 });

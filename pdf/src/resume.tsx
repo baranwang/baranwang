@@ -159,7 +159,7 @@ const Images: React.FC<{
 
 const Resume = () => {
   return (
-    <Document title={title} author={englishName}>
+    <Document title={title} author={englishName} subject={description}>
       <Page {...PageProps(true)}>
         <Text style={styles.h1}>{title}</Text>
         <Text style={styles.p}>{description}</Text>
