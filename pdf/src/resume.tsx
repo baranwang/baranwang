@@ -7,8 +7,8 @@ import ReactPDF, {
   Link,
   View,
   Image,
-  Svg,
 } from "@react-pdf/renderer";
+import cjk from "cjk-regex";
 import {
   title,
   description,
@@ -25,17 +25,24 @@ import { useMemo } from "react";
 import type { Style } from "@react-pdf/types/style";
 
 Font.register({
-  family: "AlibabaPuHuiTi",
+  family: "Taipei Sans TC",
   fonts: [
     {
       fontWeight: "thin",
-      src: resolve(__dirname, "../fonts/AlibabaPuHuiTi-2-35-Thin.ttf"),
+      src: resolve(__dirname, "../fonts/TaipeiSansTCBeta-Light.ttf"),
     },
     {
       fontWeight: "heavy",
-      src: resolve(__dirname, "../fonts/AlibabaPuHuiTi-2-105-Heavy.ttf"),
+      src: resolve(__dirname, "../fonts/TaipeiSansTCBeta-Bold.ttf"),
     },
   ],
+});
+
+Font.registerHyphenationCallback((word) => {
+  if (cjk().toRegExp().test(word)) {
+    return word.split("");
+  }
+  return [word];
 });
 
 const styles = StyleSheet.create({
@@ -43,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#424242",
     padding: 80,
     color: "#fff",
-    fontFamily: "AlibabaPuHuiTi",
+    fontFamily: "Taipei Sans TC",
   },
   pageFlex: {
     flexDirection: "column",
@@ -56,10 +63,12 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontSize: 80,
+    lineHeight: 1.25,
     fontWeight: "thin",
   },
   h2: {
     fontSize: 40,
+    lineHeight: 1.25,
     fontWeight: "heavy",
     marginBottom: 16,
   },
@@ -187,9 +196,7 @@ const Resume = () => {
         </Text>
         <Text style={styles.p}>
           互联网行业从业 <Text style={styles.strong}>{years}</Text>，从最初的 UI
-          设计师， 到现在逐步发展为一名全栈设计师，可独立完成产品的规划、
-          设计及前端开发工作。
-          乐于与团队成员分享，有极强求知欲，对多领域事物充满好奇。
+          设计师，到现在逐步发展为一名全栈设计师，可独立完成产品的规划、设计及前端开发工作。乐于与团队成员分享，有极强求知欲，对多领域事物充满好奇。
         </Text>
 
         <Text style={{ ...styles.h2, marginTop: 40 }}>教育经历</Text>
