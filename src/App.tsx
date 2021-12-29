@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { Anchor, Button, Col, ColProps, Image, Popover, Row } from "antd";
+import { useEffect, useState } from "react";
+import { Anchor, Button, Col, ColProps, Popover, Row } from "antd";
 import { Card } from "./components/Card";
+import { Image } from "./components/Image";
 import {
   title,
   chineseName,
@@ -164,34 +165,25 @@ function App() {
                 </a>
               </p>
             )}
-            <Image.PreviewGroup>
-              <Row className={styles.images} gutter={[24, 24]}>
-                {item.images.map((image) => {
-                  const colProps: ColProps = {};
-                  if (image.style === "block") {
-                    colProps.span = 24;
-                  } else {
-                    colProps.lg = 8;
-                    colProps.md = 12;
-                    colProps.sm = 24;
-                    colProps.className = styles["images-inline"];
-                  }
-                  return (
-                    <Col {...colProps} key={image.src}>
-                      <Image
-                        src={image.src}
-                        placeholder={
-                          <Image
-                            preview={false}
-                            src={`${image.src}?imageMogr2/blur/50x5/grayscale/1/ignore-error/1`}
-                          />
-                        }
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
-            </Image.PreviewGroup>
+
+            <Row className={styles.images} gutter={[24, 24]}>
+              {item.images.map((image) => {
+                const colProps: ColProps = {};
+                if (image.style === "block") {
+                  colProps.span = 24;
+                } else {
+                  colProps.lg = 8;
+                  colProps.md = 12;
+                  colProps.sm = 24;
+                  colProps.className = styles["images-inline"];
+                }
+                return (
+                  <Col {...colProps} key={image.src}>
+                    <Image src={image.src} />
+                  </Col>
+                );
+              })}
+            </Row>
           </Card>
         ))}
 
