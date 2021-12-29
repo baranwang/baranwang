@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Anchor, Button, Col, ColProps, Image, Popover, Row } from "antd";
 import { Card } from "./components/Card";
 import {
@@ -14,6 +14,7 @@ import { experience, works } from "./data";
 import { Helmet } from "react-helmet";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
+import classNames from "classnames";
 import styles from "./app.module.less";
 import fullStackDesigner from "/@/data/assets/full-stack-designer.jpg";
 
@@ -42,14 +43,29 @@ function App() {
     }
   }, [offlineReady, needRefresh]);
 
+  const [showDownload, setShowDownload] = useState(true);
+
   useEffect(() => {
-    const goToPdf = (e: Event) => {
+    const hanlderPrint = (e: Event) => {
       e.preventDefault();
       window.location.assign(`/${title}.pdf`);
     };
-    window.addEventListener("beforeprint", goToPdf);
+
+    let isScrolling: number;
+    const handleScroll = () => {
+      setShowDownload(false);
+      window.clearTimeout(isScrolling);
+      isScrolling = window.setTimeout(function () {
+        console.log("Scrolling has stopped.");
+        setShowDownload(true);
+      }, 500);
+    };
+
+    window.addEventListener("scroll", handleScroll, false);
+    window.addEventListener("beforeprint", hanlderPrint, false);
     return () => {
-      window.removeEventListener("beforeprint", goToPdf);
+      window.removeEventListener("scroll", handleScroll, false);
+      window.removeEventListener("beforeprint", hanlderPrint, false);
     };
   }, []);
 
@@ -186,7 +202,10 @@ function App() {
         </Card>
       </main>
 
-      <footer className={styles.footer}>
+      <footer
+        className={classNames(styles.footer, {
+          [styles["footer-hide"]]: !showDownload,
+        })}>
         <Button
           type="primary"
           size="large"
