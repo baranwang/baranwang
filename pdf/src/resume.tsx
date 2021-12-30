@@ -21,6 +21,7 @@ import {
 import { experience, works } from "/@/data";
 import { resolve } from "path";
 import { useMemo } from "react";
+import sharp from "sharp";
 
 import type { Style } from "@react-pdf/types/style";
 
@@ -115,14 +116,29 @@ const Footer = () => (
 );
 
 const Images: React.FC<{
-  images: { src: string; style?: "block" | "inline" }[];
+  images: { src: string | Promise<string>; style?: "block" | "inline" }[];
 }> = ({ images }) => {
   const rows = useMemo(() => {
-    const list: { src: string; style?: "block" | "inline" }[][] = [];
+    const list: {
+      src: string | Promise<string>;
+      style?: "block" | "inline";
+    }[][] = [];
+
+    const resizeBase64 = (src: string, size: number) => {
+      return sharp(Buffer.from(src.split(",").pop()!, "base64"))
+        .resize(size)
+        .flatten({ background: { r: 66, g: 66, b: 66 } })
+        .jpeg({ mozjpeg: true, quality: 99 })
+        .toBuffer()
+        .then((data) => `data:image/jpeg;base64,${data.toString("base64")}`);
+    };
     for (const image of images) {
       if (image.style === "block") {
+        image.src = resizeBase64(image.src as string, 1120);
         list.push([image]);
       } else {
+        image.src = resizeBase64(image.src as string, 400);
+
         const lastRow = list[list.length - 1];
         if (lastRow && lastRow[0].style !== "block") {
           if (lastRow.length < 3) {
