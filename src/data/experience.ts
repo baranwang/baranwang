@@ -3,7 +3,7 @@ export const experience = [
     company: "看见网络科技（上海）有限公司",
     title: "全栈设计师",
     startTime: "2019.05",
-    endTime: "NOW",
+    endTime: "2022.01",
   },
   {
     company: "尼奥巴兰网络科技（上海）有限公司",
