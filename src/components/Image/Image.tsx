@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+
+import classNames from 'classnames';
+import styles from './Image.module.less';
 
 export const Image: React.FC<{
   src: string;
 }> = ({ src }) => {
   const ref = useRef<HTMLPictureElement>(null);
 
-  const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState('');
 
   useEffect(() => {
     if (!ref.current) return;
     let observer: IntersectionObserver;
-    if (!("IntersectionObserver" in window)) {
+    if (!('IntersectionObserver' in window)) {
       setImageSrc(src);
     } else {
       observer = new IntersectionObserver(
@@ -34,12 +37,16 @@ export const Image: React.FC<{
   }, [src, ref]);
 
   return (
-    <picture ref={ref}>
+    <picture
+      className={classNames(styles.image, {
+        [styles.unloaded]: !imageSrc,
+      })}
+      ref={ref}>
       {!!imageSrc && (
         <>
           <source
             srcSet={`${imageSrc}?imageMogr2/format/webp/ignore-error/1`}
-            type="image/webp"
+            type='image/webp'
           />
           <img src={imageSrc} />
         </>
