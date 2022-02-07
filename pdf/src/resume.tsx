@@ -7,84 +7,85 @@ import ReactPDF, {
   Link,
   View,
   Image,
-} from "@react-pdf/renderer";
-import cjk from "cjk-regex";
+} from '@react-pdf/renderer';
+import cjk from 'cjk-regex';
 import {
   title,
   description,
   chineseName,
   englishName,
   email,
+  mobile,
   age,
   years,
-} from "/@/config";
-import { experience, works } from "/@/data";
-import { resolve } from "path";
-import { useMemo } from "react";
-import sharp from "sharp";
+} from '/@/config';
+import { experience, works } from '/@/data';
+import { resolve } from 'path';
+import { useMemo } from 'react';
+import sharp from 'sharp';
 
-import type { Style } from "@react-pdf/types/style";
+import type { Style } from '@react-pdf/types/style';
 
 Font.register({
-  family: "Taipei Sans TC",
+  family: 'Taipei Sans TC',
   fonts: [
     {
-      fontWeight: "thin",
-      src: resolve(__dirname, "../fonts/TaipeiSansTCBeta-Light.ttf"),
+      fontWeight: 'thin',
+      src: resolve(__dirname, '../fonts/TaipeiSansTCBeta-Light.ttf'),
     },
     {
-      fontWeight: "heavy",
-      src: resolve(__dirname, "../fonts/TaipeiSansTCBeta-Bold.ttf"),
+      fontWeight: 'heavy',
+      src: resolve(__dirname, '../fonts/TaipeiSansTCBeta-Bold.ttf'),
     },
   ],
 });
 
 Font.registerHyphenationCallback((word) => {
   if (cjk().toRegExp().test(word)) {
-    return word.split("");
+    return word.split('');
   }
   return [word];
 });
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#424242",
+    backgroundColor: '#424242',
     padding: 80,
-    color: "#fff",
-    fontFamily: "Taipei Sans TC",
+    color: '#fff',
+    fontFamily: 'Taipei Sans TC',
   },
   pageFlex: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   footer: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-end",
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     marginBottom: -16,
   },
   h1: {
     fontSize: 80,
     lineHeight: 1.25,
-    fontWeight: "thin",
+    fontWeight: 'thin',
   },
   h2: {
     fontSize: 40,
     lineHeight: 1.25,
-    fontWeight: "heavy",
+    fontWeight: 'heavy',
     marginBottom: 16,
   },
   p: {
     fontSize: 24,
-    fontWeight: "thin",
+    fontWeight: 'thin',
     marginBottom: 16,
     lineHeight: 1.5,
-    textAlign: "left",
+    textAlign: 'left',
   },
   a: {
-    color: "#fff",
+    color: '#fff',
   },
   strong: {
-    fontWeight: "heavy",
+    fontWeight: 'heavy',
   },
 });
 
@@ -108,39 +109,39 @@ const Footer = () => (
       </Link>
     </Text>
     <Text style={styles.p}>
-      <Link src="tel:+8618521081077" style={styles.a}>
-        +86 185-2108-1077
+      <Link src={`tel:${mobile}`} style={styles.a}>
+        {mobile}
       </Link>
     </Text>
   </View>
 );
 
 const Images: React.FC<{
-  images: { src: string | Promise<string>; style?: "block" | "inline" }[];
+  images: { src: string | Promise<string>; style?: 'block' | 'inline' }[];
 }> = ({ images }) => {
   const rows = useMemo(() => {
     const list: {
       src: string | Promise<string>;
-      style?: "block" | "inline";
+      style?: 'block' | 'inline';
     }[][] = [];
 
     const resizeBase64 = (src: string, size: number) => {
-      return sharp(Buffer.from(src.split(",").pop()!, "base64"))
+      return sharp(Buffer.from(src.split(',').pop()!, 'base64'))
         .resize(size)
         .flatten({ background: { r: 66, g: 66, b: 66 } })
         .jpeg({ mozjpeg: true, quality: 99 })
         .toBuffer()
-        .then((data) => `data:image/jpeg;base64,${data.toString("base64")}`);
+        .then((data) => `data:image/jpeg;base64,${data.toString('base64')}`);
     };
     for (const image of images) {
-      if (image.style === "block") {
+      if (image.style === 'block') {
         image.src = resizeBase64(image.src as string, 1120);
         list.push([image]);
       } else {
         image.src = resizeBase64(image.src as string, 400);
 
         const lastRow = list[list.length - 1];
-        if (lastRow && lastRow[0].style !== "block") {
+        if (lastRow && lastRow[0].style !== 'block') {
           if (lastRow.length < 3) {
             lastRow.push(image);
           } else {
@@ -157,13 +158,13 @@ const Images: React.FC<{
   return (
     <View style={{ margin: -8, marginTop: 16 }}>
       {rows.map((row, index) => {
-        let flexDirection: Style["flexDirection"] = "column";
-        if (row[0].style !== "block") {
-          flexDirection = "row";
+        let flexDirection: Style['flexDirection'] = 'column';
+        if (row[0].style !== 'block') {
+          flexDirection = 'row';
           if (row.length < 3) {
             row = row.concat(
               Array(3 - row.length).fill({
-                src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=",
+                src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=',
               })
             );
           }
@@ -201,10 +202,10 @@ const Resume = () => {
         </Text>
         <Text style={styles.p}>
           联系电话：
-          <Link src="tel:+8618521081077" style={[styles.strong, styles.a]}>
-            +86 185-2108-1077
+          <Link src={`tel:${mobile}`} style={[styles.strong, styles.a]}>
+            {mobile}
           </Link>
-          {" · "}
+          {' · '}
           电子邮箱：
           <Link src={`mailto:${email}`} style={[styles.strong, styles.a]}>
             {email}
@@ -257,4 +258,4 @@ const Resume = () => {
   );
 };
 
-ReactPDF.render(<Resume />, resolve(process.cwd(), "public", `${title}.pdf`));
+ReactPDF.render(<Resume />, resolve(process.cwd(), 'public', `${title}.pdf`));
