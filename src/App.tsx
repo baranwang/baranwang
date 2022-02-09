@@ -18,6 +18,7 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
 
 import classNames from 'classnames';
 import styles from './app.module.less';
+import resumePDF from '/@/resume.pdf?url';
 import fullStackDesigner from '/@/data/assets/full-stack-designer.jpg';
 
 const Footer = () => {
@@ -202,7 +203,7 @@ function App() {
         <Button
           type='primary'
           size='large'
-          href={`${title}.pdf`}
+          href={resumePDF}
           download={`${description}.pdf`}>
           下载 PDF
         </Button>

@@ -258,4 +258,4 @@ const Resume = () => {
   );
 };
 
-ReactPDF.render(<Resume />, resolve(process.cwd(), 'public', `${title}.pdf`));
+ReactPDF.render(<Resume />, resolve(process.cwd(), 'src', 'resume.pdf'));
