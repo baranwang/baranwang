@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
   a: {
     color: '#fff',
+    textDecoration: 'none',
   },
   strong: {
     fontWeight: 'heavy',
@@ -111,6 +112,11 @@ const Footer = () => (
     <Text style={styles.p}>
       <Link src={`tel:${mobile}`} style={styles.a}>
         {mobile}
+      </Link>
+    </Text>
+    <Text style={styles.p}>
+      <Link src='https://resume.baran.wang' style={styles.a}>
+        https://resume.baran.wang
       </Link>
     </Text>
   </View>
