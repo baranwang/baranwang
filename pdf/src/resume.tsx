@@ -244,6 +244,7 @@ const Resume = () => {
         <Page key={item.title} {...PageProps()}>
           <Text style={styles.h2}>{item.title}</Text>
           <Text style={styles.p}>{item.description}</Text>
+          <Text style={styles.p}>项目角色：{item.role.join(' / ')}</Text>
           {item.url && (
             <Text style={styles.p}>
               项目地址：

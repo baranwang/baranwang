@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Anchor, Button, Col, ColProps, Popover, Row } from 'antd';
+import { Anchor, Button, Col, ColProps, Popover, Row, Space, Tag } from 'antd';
 import { Card } from './components/Card';
 import { Image } from './components/Image';
 import {
@@ -159,6 +159,7 @@ function App() {
           <Card id={`works-${index}`} key={item.title}>
             <h2>{item.title}</h2>
             <p>{item.description}</p>
+            <p>项目角色：{item.role.join(' / ')}</p>
             {item.url && (
               <p>
                 项目地址：

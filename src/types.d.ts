@@ -22,6 +22,7 @@ declare module 'virtual:pwa-register/react' {
 type Work = {
   title: string
   description: string
+  role: Array<'产品' | '设计' | '前端开发' | '后端开发' | '运营'>
   url?: string
   images: {
     src: string
