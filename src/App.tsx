@@ -12,7 +12,7 @@ import {
   years,
   description,
 } from './config';
-import { experience, works } from './data';
+import { awards, experience, works } from './data';
 import { Helmet } from 'react-helmet';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
@@ -143,6 +143,15 @@ function App() {
               <p key={`${item.company}-${item.startTime}-${item.endTime}`}>
                 {item.startTime} ～ {item.endTime} · {item.company} ·{' '}
                 {item.title}
+              </p>
+            ))}
+          </section>
+
+          <section>
+            <h2>获奖经历</h2>
+            {awards.map((item) => (
+              <p key={item.name}>
+                {item.year} · {item.name}
               </p>
             ))}
           </section>
