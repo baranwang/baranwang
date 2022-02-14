@@ -19,7 +19,7 @@ import {
   age,
   years,
 } from '/@/config';
-import { experience, works } from '/@/data';
+import { awards, experience, works } from '/@/data';
 import { resolve } from 'path';
 import { useMemo } from 'react';
 import sharp from 'sharp';
@@ -231,6 +231,13 @@ const Resume = () => {
             key={`${item.company}-${item.startTime}-${item.endTime}`}
             style={styles.p}>
             {item.startTime} ～ {item.endTime} · {item.company} · {item.title}
+          </Text>
+        ))}
+
+        <Text style={{ ...styles.h2, marginTop: 40 }}>获奖经历</Text>
+        {awards.map((item) => (
+          <Text key={item.name} style={styles.p}>
+            {item.year} · {item.name}
           </Text>
         ))}
       </Page>
