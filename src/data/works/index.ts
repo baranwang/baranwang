@@ -12,20 +12,22 @@ import { yixue } from './yixue'
 import { kchat } from './kchat'
 import { bangs } from './bangs'
 import { smemo } from './smemo'
+import { casualday } from './casualday'
 
 export const works = [
   coolvox,
   playara,
-  stardtb,
   kanjianYuedianHardware,
-  kanjianAndroid,
-  kanjianNow,
-  kanjianTV,
-  kanjianTV4Wasu,
-  electriczoo,
-  PBsansCondensed,
-  yixue,
+  casualday,
+  stardtb,
   kchat,
   bangs,
-  smemo
+  yixue,
+  PBsansCondensed,
+  kanjianTV4Wasu,
+  kanjianTV,
+  kanjianNow,
+  kanjianAndroid,
+  electriczoo,
+  smemo,
 ]
