@@ -25,6 +25,7 @@ import { useMemo } from 'react';
 import sharp from 'sharp';
 
 import type { Style } from '@react-pdf/types/style';
+import { links } from '/@/data/links';
 
 Font.register({
   family: 'Taipei Sans TC',
@@ -238,6 +239,15 @@ const Resume = () => {
         {awards.map((item) => (
           <Text key={item.name} style={styles.p}>
             {item.year} · {item.name}
+          </Text>
+        ))}
+
+        <Text style={{ ...styles.h2, marginTop: 40 }}>社交主页</Text>
+        {links.map((item) => (
+          <Text key={item.name} style={styles.p}>
+            <Link src={item.url} style={styles.a}>
+              [{item.name}] {item.url}
+            </Link>
           </Text>
         ))}
       </Page>

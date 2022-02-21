@@ -20,6 +20,7 @@ import classNames from 'classnames';
 import styles from './app.module.less';
 import resumePDF from '/@/resume.pdf?url';
 import fullStackDesigner from '/@/data/assets/full-stack-designer.jpg';
+import { links } from './data/links';
 
 const Footer = () => {
   return (
@@ -152,6 +153,17 @@ function App() {
             {awards.map((item) => (
               <p key={item.name}>
                 {item.year} · {item.name}
+              </p>
+            ))}
+          </section>
+
+          <section>
+            <h2>社交主页</h2>
+            {links.map((item) => (
+              <p key={item.name}>
+                <a href={item.url} target='_blank'>
+                  [{item.name}] {item.url}
+                </a>
               </p>
             ))}
           </section>
