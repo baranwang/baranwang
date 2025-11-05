@@ -3,6 +3,7 @@ import { createRsbuild, defineConfig, type RsbuildPlugin } from "@rsbuild/core";
 import { pluginMdx } from "@rsbuild/plugin-mdx";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { chromium } from "playwright";
+import rehypeExternalLinks from "rehype-external-links";
 
 const pdfPlugin = (): RsbuildPlugin => {
 	return {
@@ -41,5 +42,30 @@ const pdfPlugin = (): RsbuildPlugin => {
 };
 
 export default defineConfig({
-	plugins: [pluginReact(), pluginMdx(), pdfPlugin()],
+	html: {
+		title: "Baran's Resume",
+		meta: [
+			{
+				name: "description",
+				content: "Baran's Resume",
+			},
+		],
+	},
+	plugins: [
+		pluginReact(),
+		pluginMdx({
+			mdxLoaderOptions: {
+				rehypePlugins: [
+					[
+						rehypeExternalLinks,
+						{
+							target: "_blank",
+							rel: "noopener noreferrer",
+						},
+					],
+				],
+			},
+		}),
+		pdfPlugin(),
+	],
 });
