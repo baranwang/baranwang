@@ -2,7 +2,13 @@ import { differenceInYears } from "date-fns";
 import type React from "react";
 
 const loadContext = <T>(context: Rspack.Context) => {
-	return context.keys().map((key) => context(key) as T);
+	return context.keys().map((key) => {
+		const data = context(key) as T;
+		return {
+			...data,
+			key,
+		};
+	});
 };
 
 export const INFO = {

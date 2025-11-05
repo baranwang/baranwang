@@ -40,7 +40,7 @@ const App = () => {
 				<Section title="工作履历">
 					{INFO.workExperience.map((item, index, array) => {
 						return (
-							<Fragment key={`${item.company}-${item.duration}`}>
+							<Fragment key={item.key}>
 								<div className="flex items-center justify-between">
 									<h3 className="font-bold">
 										{item.company} · {item.title}
@@ -59,7 +59,7 @@ const App = () => {
 				<Section title="项目经历">
 					{INFO.projectExperience.map((item, index, array) => {
 						return (
-							<Fragment key={`${item.title}-${item.team}`}>
+							<Fragment key={item.key}>
 								<h3 className="flex items-center justify-between">
 									<span className="font-bold">{item.title}</span>
 									<span>{item.team}</span>
