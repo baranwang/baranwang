@@ -22,6 +22,7 @@ jobs:
 
       - run: pnpm approve-builds
       - run: pnpm install
+      - run: pnpm build
 
       - uses: cloudflare/wrangler-action@v3
         with:
