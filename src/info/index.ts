@@ -41,7 +41,7 @@ export const INFO = {
 		return loadContext<{
 			title: string;
 			team: string;
-			tags: string[];
+			tags?: string[];
 			order: number;
 			default: () => React.JSX.Element;
 		}>(

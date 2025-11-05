@@ -60,12 +60,12 @@ const App = () => {
 					{INFO.projectExperience.map((item, index, array) => {
 						return (
 							<Fragment key={`${item.title}-${item.team}`}>
-								<h3>
-									<span className="mr-1">{item.team}</span>
+								<h3 className="flex items-center justify-between">
 									<span className="font-bold">{item.title}</span>
+									<span>{item.team}</span>
 								</h3>
 								<div className="my-2 flex items-center space-x-2">
-									{item.tags.map((tag) => (
+									{item.tags?.map((tag) => (
 										<span
 											key={tag}
 											className="rounded bg-white/60 px-2 py-0.5 font-semibold text-stone-900 text-xs"
@@ -83,6 +83,15 @@ const App = () => {
 					})}
 				</Section>
 			</main>
+
+			<a
+				className="-translate-x-1/2 fixed bottom-8 left-1/2 z-50 min-w-xs cursor-pointer rounded-md bg-white/10 px-4 py-2 text-center shadow-md backdrop-blur-lg print:hidden"
+				type="button"
+				href="/resume.pdf"
+				download={`${INFO.name.zh}-${INFO.phone.replace(/^\+86/, "")}-${INFO.email}.pdf`}
+			>
+				下载 PDF
+			</a>
 
 			<Footer />
 		</div>
