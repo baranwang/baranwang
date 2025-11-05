@@ -22,6 +22,8 @@ jobs:
 
       - run: pnpm install
 
+      - run: npx playwright install chromium --with-deps
+
       - run: pnpm build
 
       - uses: cloudflare/wrangler-action@v3
