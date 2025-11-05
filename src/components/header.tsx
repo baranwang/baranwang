@@ -1,7 +1,20 @@
 import { Suspense, use } from "react";
-import { codeToHtml } from "shiki";
+import { createHighlighterCore } from "shiki/bundle/web";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+
 import { INFO } from "@/info";
 
+const codeToHtml = async (code: string) => {
+	const highlighter = await createHighlighterCore({
+		langs: [import("shiki/langs/javascript.mjs")],
+		themes: [import("shiki/themes/vitesse-black.mjs")],
+		engine: createJavaScriptRegexEngine(),
+	});
+	return highlighter.codeToHtml(code, {
+		lang: "javascript",
+		theme: "vitesse-black",
+	});
+};
 const code = `export class BaranWang {
   static name = '${INFO.name.zh}';
 
@@ -17,12 +30,7 @@ const code = `export class BaranWang {
 }`;
 
 const CodeBlock = () => {
-	const codeHtml = use(
-		codeToHtml(code, {
-			lang: "typescript",
-			theme: "vitesse-black",
-		}),
-	);
+	const codeHtml = use(codeToHtml(code));
 	return (
 		<div
 			className="absolute top-9 right-4 opacity-50 [&_.shiki]:bg-transparent!"
