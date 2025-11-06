@@ -33,7 +33,7 @@ const CodeBlock = () => {
 	const codeHtml = use(codeToHtml(code));
 	return (
 		<div
-			className="absolute top-9 right-4 opacity-50 [&_.shiki]:bg-transparent!"
+			className="absolute top-9 right-4 font-mono opacity-30 [&_.shiki]:bg-transparent!"
 			// biome-ignore lint/security/noDangerouslySetInnerHtml: 渲染代码块
 			dangerouslySetInnerHTML={{ __html: codeHtml }}
 		/>

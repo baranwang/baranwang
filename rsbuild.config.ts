@@ -14,18 +14,14 @@ const pdfPlugin = (): RsbuildPlugin => {
 				const preview = await rsbuild.preview();
 
 				const browser = await chromium.launch();
-				const context = await browser.newContext();
-				const page = await context.newPage();
+				const page = await browser.newPage();
 
 				await page.setViewportSize({ width: 800, height: 800 });
-
 				await page.goto(preview.urls[0], { waitUntil: "networkidle" });
-
 				const contentHeight = await page.evaluate(() => {
 					const body = document.body;
 					return Math.max(body.scrollHeight, body.offsetHeight);
 				});
-
 				await page.pdf({
 					path: path.resolve(api.context.distPath, "resume.pdf"),
 					width: 800,
