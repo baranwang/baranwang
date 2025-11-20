@@ -17,11 +17,11 @@ const pdfPlugin = (): RsbuildPlugin => {
 				const page = await browser.newPage();
 
 				await page.setViewportSize({ width: 800, height: 800 });
+				await page.emulateMedia({ media: "print" });
 				await page.goto(preview.urls[0], { waitUntil: "networkidle" });
-				const contentHeight = await page.evaluate(() => {
-					const body = document.body;
-					return Math.max(body.scrollHeight, body.offsetHeight);
-				});
+				const contentHeight = await page.evaluate(
+					() => document.querySelector("#root")?.getBoundingClientRect().height,
+				);
 				await page.pdf({
 					path: path.resolve(api.context.distPath, "resume.pdf"),
 					width: 800,

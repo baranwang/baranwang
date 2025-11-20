@@ -88,14 +88,17 @@ const App = () => {
 				</Section>
 			</main>
 
-			<a
-				className="-translate-x-1/2 fixed bottom-8 left-1/2 z-50 min-w-xs cursor-pointer rounded-md bg-white/10 px-4 py-2 text-center shadow-md backdrop-blur-lg print:hidden"
-				type="button"
-				href="/resume.pdf"
-				download={`${INFO.name.zh}-${INFO.phone.replace(/^\+86/, "")}-${INFO.email}.pdf`}
-			>
-				下载 PDF
-			</a>
+			<div className="print:hidden">
+				<a
+					className="-translate-x-1/2 fixed bottom-8 left-1/2 z-50 min-w-xs cursor-pointer rounded-md bg-white/10 px-4 py-2 text-center shadow-md backdrop-blur-lg"
+					type="button"
+					href="/resume.pdf"
+					download={`${INFO.name.zh}-${INFO.phone.replace(/^\+86/, "")}-${INFO.email}.pdf`}
+				>
+					下载 PDF
+				</a>
+				<div className="h-24" />
+			</div>
 
 			<Footer />
 		</div>
