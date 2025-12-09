@@ -22,7 +22,7 @@ const App = () => {
 						{INFO.name.zh} / {INFO.name.en}
 					</div>
 					<MDXContent content={profile} />
-					<div className="mt-4 flex gap-2">
+					<div className="mt-4 hidden flex-wrap gap-2 print:flex">
 						<a href={`tel:${INFO.phone}`}>📱️ {INFO.phoneDisplay}</a>
 						{" · "}
 						<a href={`mailto:${INFO.email}`}>📧 {INFO.email}</a>
@@ -60,12 +60,12 @@ const App = () => {
 					{INFO.projectExperience.map((item, index, array) => {
 						return (
 							<Fragment key={item.key}>
-								<h3 className="flex items-center justify-between">
+								<h3 className="flex items-start justify-between">
 									<span className="font-bold">{item.title}</span>
-									<span>{item.team}</span>
+									<span className="whitespace-nowrap">{item.team}</span>
 								</h3>
 								<div
-									className={cn("my-2 flex items-center space-x-2", {
+									className={cn("my-2 flex flex-wrap items-center gap-2", {
 										hidden: !item.tags?.length,
 									})}
 								>
