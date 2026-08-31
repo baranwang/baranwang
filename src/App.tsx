@@ -5,6 +5,7 @@ import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { MDXContent } from "./components/mdx-content";
 import { Section } from "./components/section";
+import { Tag } from "./components/tag";
 import { INFO } from "./info";
 import profile from "./info/profile.mdx";
 import skills from "./info/skills.mdx";
@@ -33,10 +34,6 @@ const App = () => {
 					<MDXContent content={skills} />
 				</Section>
 
-				<Section title="教育经历">
-					<p>2011 ～ 2014 · 平顶山学院 · 艺术设计</p>
-				</Section>
-
 				<Section title="工作履历">
 					{INFO.workExperience.map((item, index, array) => {
 						return (
@@ -56,6 +53,17 @@ const App = () => {
 					})}
 				</Section>
 
+				<Section title="教育经历">
+					<p>
+						2026 ～ 2028 · 上海开放大学 · 人工智能
+						<Tag className="ml-2">本科 · 在读</Tag>
+					</p>
+					<p>
+						2011 ～ 2014 · 平顶山学院 · 艺术设计
+						<Tag className="ml-2">专科</Tag>
+					</p>
+				</Section>
+
 				<Section title="项目经历">
 					{INFO.projectExperience.map((item, index, array) => {
 						return (
@@ -70,12 +78,7 @@ const App = () => {
 									})}
 								>
 									{item.tags?.map((tag) => (
-										<span
-											key={tag}
-											className="rounded bg-white/60 px-2 py-0.5 font-semibold text-stone-900 text-xs"
-										>
-											{tag}
-										</span>
+										<Tag key={tag}>{tag}</Tag>
 									))}
 								</div>
 								<MDXContent content={item.default} />

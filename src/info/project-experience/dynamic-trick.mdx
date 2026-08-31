@@ -1,10 +1,8 @@
-export const order = 1;
+export const order = 4;
 export const title = '电商安全动态埋点攻防';
 export const team = '电商治理';
 export const tags = ['React', 'Node.js', 'MySQL', 'Golang', 'MQ', 'Hive', 'ClickHouse'];
 
-参与设计开发电商安全的动态埋点攻防系统。管理端利用 Nodejs 和 MySQL 配置动态配置及埋点任务；
-
-使用 Golang 开发服务端给客户端下发配置，通过 MQ 将日志落表，以承接 6 位数峰值 QPS，上线后 SLA 长期稳定在 99.9%+。
-
-通过 Hive 离线数据开发，帮助电商安全同学抓到上线有效 Case，为电商安全增强了反爬能力上限。
+- 参与设计与开发电商安全动态埋点攻防系统，使用 Node.js 和 MySQL 建设管理端，支持动态埋点规则与任务配置。
+- 使用 Golang 开发配置下发服务，并通过 MQ 完成日志采集与落表，承接六位数峰值 QPS，上线后 SLA 长期稳定在 99.9%+。
+- 基于 Hive 开展离线数据分析，协助安全团队识别上线后的有效攻击样本，提升电商业务的反爬识别能力。

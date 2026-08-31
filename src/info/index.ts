@@ -1,6 +1,8 @@
 import { differenceInYears } from "date-fns";
 import type React from "react";
 
+import { parseDurationStart } from "./duration";
+
 const loadContext = <T>(context: Rspack.Context) => {
 	return context.keys().map((key) => {
 		const data = context(key) as T;
@@ -9,10 +11,6 @@ const loadContext = <T>(context: Rspack.Context) => {
 			key,
 		};
 	});
-};
-
-const parseDurationToDate = (duration: string) => {
-	return new Date(duration.split("~")[0].trim().replace('/', '-'));
 };
 
 export const INFO = {
@@ -42,9 +40,9 @@ export const INFO = {
 		}>(
 			import.meta.webpackContext("./work-experience", { regExp: /\.mdx$/ }),
 		).sort((a, b) => {
-			const aStart = parseDurationToDate(a.duration);
-			const bStart = parseDurationToDate(b.duration);
-			return bStart.getTime() - aStart.getTime();
+			const aStart = parseDurationStart(a.duration);
+			const bStart = parseDurationStart(b.duration);
+			return bStart - aStart;
 		});
 	},
 	get projectExperience() {
