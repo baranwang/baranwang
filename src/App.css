@@ -16,3 +16,9 @@
 	content: "";
 	mask-image: linear-gradient(to bottom, black, transparent 78%);
 }
+
+@media print {
+	.resume-ambient::before {
+		display: none;
+	}
+}
