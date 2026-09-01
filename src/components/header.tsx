@@ -33,7 +33,7 @@ const CodeBlock = () => {
 	const codeHtml = use(codeToHtml(code));
 	return (
 		<div
-			className="absolute top-9 right-4 font-mono opacity-30 [&_.shiki]:bg-transparent!"
+			className="absolute top-9 right-4 hidden font-mono opacity-30 md:block [&_.shiki]:bg-transparent!"
 			// biome-ignore lint/security/noDangerouslySetInnerHtml: 渲染代码块
 			dangerouslySetInnerHTML={{ __html: codeHtml }}
 		/>
@@ -42,7 +42,7 @@ const CodeBlock = () => {
 
 export const Header = () => {
 	return (
-		<header className="absolute top-0 right-0 left-0 z-0 h-1/3 bg-linear-to-b from-blue-700/30 to-transparent">
+		<header className="resume-ambient absolute top-0 right-0 left-0 z-0 h-[42rem] overflow-hidden">
 			<Suspense fallback={null}>
 				<CodeBlock />
 			</Suspense>

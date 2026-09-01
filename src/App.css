@@ -1,1 +1,18 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+.resume-ambient {
+	background:
+		radial-gradient(ellipse at 12% 0%, rgb(37 99 235 / 18%), transparent 50%),
+		radial-gradient(ellipse at 82% 8%, rgb(126 34 206 / 12%), transparent 46%);
+}
+
+.resume-ambient::before {
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgb(148 163 184 / 5%) 1px, transparent 1px),
+		linear-gradient(90deg, rgb(148 163 184 / 5%) 1px, transparent 1px);
+	background-size: 32px 32px;
+	content: "";
+	mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
