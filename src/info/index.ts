@@ -35,6 +35,7 @@ export const INFO = {
 		return loadContext<{
 			company: string;
 			title: string;
+			tag?: string;
 			duration: string;
 			default: () => React.JSX.Element;
 		}>(

@@ -40,7 +40,7 @@ const App = () => {
 							<Fragment key={item.key}>
 								<div className="flex items-center justify-between">
 									<h3 className="font-bold">
-										{item.company} · {item.title}
+										{item.company} · {item.title} {item.tag ? <span className="ml-1 font-light text-white/50">{item.tag}</span> : null}
 									</h3>
 									<time>{item.duration}</time>
 								</div>
