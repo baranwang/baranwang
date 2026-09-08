@@ -49,7 +49,7 @@ export const INFO = {
 	get projectExperience() {
 		return loadContext<{
 			title: string;
-			team: string;
+			team?: string;
 			tags?: string[];
 			order: number;
 			default: () => React.JSX.Element;

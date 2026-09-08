@@ -70,7 +70,7 @@ const App = () => {
 							<Fragment key={item.key}>
 								<h3 className="flex items-start justify-between">
 									<span className="font-bold">{item.title}</span>
-									<span className="whitespace-nowrap">{item.team}</span>
+									{item.team ? <span className="whitespace-nowrap">{item.team}</span> : null}
 								</h3>
 								<div
 									className={cn("my-2 flex flex-wrap items-center gap-2", {
