@@ -23,9 +23,7 @@ const App = () => {
 						{INFO.name.zh} / {INFO.name.en}
 					</div>
 					<MDXContent content={profile} />
-					<div className="mt-4 hidden flex-wrap gap-2 print:flex">
-						<a href={`tel:${INFO.phone}`}>📱️ {INFO.phoneDisplay}</a>
-						{" · "}
+					<div className="mt-4 flex flex-wrap gap-2">
 						<a href={`mailto:${INFO.email}`}>📧 {INFO.email}</a>
 					</div>
 				</section>
@@ -96,7 +94,7 @@ const App = () => {
 					className="-translate-x-1/2 fixed bottom-8 left-1/2 z-50 min-w-xs cursor-pointer rounded-md bg-white/10 px-4 py-2 text-center shadow-md backdrop-blur-lg"
 					type="button"
 					href="/resume.pdf"
-					download={`${INFO.name.zh}-${INFO.phone.replace(/^\+86/, "")}-${INFO.email}.pdf`}
+					download={`${INFO.name.zh}-${INFO.email}.pdf`}
 				>
 					下载 PDF
 				</a>

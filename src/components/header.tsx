@@ -20,10 +20,6 @@ const code = `export class BaranWang {
 
   static birthday = new Date('${INFO.birthDate.toLocaleString()}');
 
-  call() {
-    return 'tel:${INFO.phone}';
-  }
-
   sendEmail() {
     return 'mailto:${INFO.email}';
   }

@@ -18,10 +18,6 @@ export const INFO = {
 		zh: "王柄涵",
 		en: "Baran",
 	},
-	phoneDisplay: "+86 175-0212-2111",
-	get phone() {
-		return this.phoneDisplay.replace(/[- ]/g, "");
-	},
 	email: "me@baran.wang",
 	birthDate: new Date("1993-05-01T12:40:00.000+08:00"),
 	careerStartDate: new Date("2014-08-18T00:00:00.000+08:00"),
