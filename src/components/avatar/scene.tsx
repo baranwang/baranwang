@@ -8,10 +8,11 @@ import {
 	useRef,
 	useState,
 } from "react";
-import type { Clock } from "three";
+import type { Clock, Group } from "three";
 
 import avatarModelUrl from "@/assets/avatar.glb";
 import { GlbModel } from "./glb-model";
+import { HologramReveal } from "./hologram";
 import {
 	type Gesture,
 	type GestureName,
@@ -21,6 +22,8 @@ import {
 import { PlaceholderModel } from "./placeholder-model";
 
 export const AVATAR_MODEL_URL = avatarModelUrl;
+
+const SHADOW_OPACITY = 0.35;
 
 class FallbackOnError extends Component<
 	{ fallback: ReactNode; children: ReactNode },
@@ -55,6 +58,7 @@ const useModelAvailable = (url: string) => {
 const AvatarScene = () => {
 	const gesture = useRef<Gesture | null>(null);
 	const clock = useRef<Clock>(null);
+	const shadow = useRef<Group>(null);
 	const modelAvailable = useModelAvailable(AVATAR_MODEL_URL);
 	const placeholder = <PlaceholderModel gesture={gesture} />;
 
@@ -86,7 +90,6 @@ const AvatarScene = () => {
 			onCreated={(state) => {
 				state.camera.lookAt(0, 1.12, 0);
 				clock.current = state.clock;
-				setTimeout(() => play("wave"), 900);
 			}}
 		>
 			<ambientLight intensity={1.4} />
@@ -106,20 +109,27 @@ const AvatarScene = () => {
 			>
 				{/* biome-ignore lint/a11y/noStaticElementInteractions: three.js group, not a DOM element */}
 				<group onClick={handleClick}>
-					{modelAvailable === false ? placeholder : null}
-					{modelAvailable ? (
-						<FallbackOnError fallback={placeholder}>
-							<Suspense fallback={null}>
-								<GlbModel url={AVATAR_MODEL_URL} gesture={gesture} />
-							</Suspense>
-						</FallbackOnError>
-					) : null}
+					<HologramReveal
+						shadow={shadow}
+						shadowOpacity={SHADOW_OPACITY}
+						onRevealed={() => setTimeout(() => play("wave"), 300)}
+					>
+						{modelAvailable === false ? placeholder : null}
+						{modelAvailable ? (
+							<FallbackOnError fallback={placeholder}>
+								<Suspense fallback={null}>
+									<GlbModel url={AVATAR_MODEL_URL} gesture={gesture} />
+								</Suspense>
+							</FallbackOnError>
+						) : null}
+					</HologramReveal>
 				</group>
 			</PresentationControls>
 
 			<ContactShadows
+				ref={shadow}
 				position={[0, 0, 0]}
-				opacity={0.35}
+				opacity={SHADOW_OPACITY}
 				scale={4}
 				blur={2.4}
 				far={2}
