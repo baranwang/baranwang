@@ -51,18 +51,58 @@ const pdfPlugin = (): RsbuildPlugin => {
 	};
 };
 
+const SITE_URL = "https://resume.baran.wang";
+const TITLE = "王柄涵 Baran · 全栈工程师";
+const DESCRIPTION =
+	"王柄涵（Baran）的简历：UI/UX 设计出身的全栈工程师，专注 React / TypeScript / Node.js 与 AI 工程。";
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
+const property = (name: string, content: string) => ({
+	property: name,
+	content,
+});
+
 export default defineConfig({
 	html: {
-		title: "王柄涵 Baran · 全栈工程师",
-		meta: [
+		title: TITLE,
+		meta: {
+			description: DESCRIPTION,
+			viewport:
+				"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+			"theme-color": "#fafaf9",
+			"og:type": property("og:type", "profile"),
+			"og:site_name": property("og:site_name", "王柄涵 Baran"),
+			"og:locale": property("og:locale", "zh_CN"),
+			"og:url": property("og:url", `${SITE_URL}/`),
+			"og:title": property("og:title", TITLE),
+			"og:description": property("og:description", DESCRIPTION),
+			"og:image": property("og:image", OG_IMAGE),
+			"og:image:type": property("og:image:type", "image/png"),
+			"og:image:width": property("og:image:width", "1200"),
+			"og:image:height": property("og:image:height", "630"),
+			"og:image:alt": property("og:image:alt", `${TITLE}，附 Q 版形象`),
+			"profile:first_name": property("profile:first_name", "柄涵"),
+			"profile:last_name": property("profile:last_name", "王"),
+			"profile:username": property("profile:username", "baranwang"),
+			"twitter:card": "summary_large_image",
+			"twitter:title": TITLE,
+			"twitter:description": DESCRIPTION,
+			"twitter:image": OG_IMAGE,
+		},
+		tags: [
+			{ tag: "link", attrs: { rel: "canonical", href: `${SITE_URL}/` } },
 			{
-				name: "description",
-				content: "王柄涵（Baran）的简历：全栈工程师",
+				tag: "link",
+				attrs: {
+					rel: "icon",
+					href: "/icon-192.png",
+					type: "image/png",
+					sizes: "192x192",
+				},
 			},
 			{
-				name: "viewport",
-				content:
-					"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+				tag: "link",
+				attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
 			},
 		],
 	},
