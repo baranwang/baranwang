@@ -25,7 +25,7 @@ export const Header = () => {
 					<div className="space-y-2">
 						<p className="font-medium text-stone-800 text-xl">{INFO.role}</p>
 						<p className="text-sm text-stone-500">
-							{INFO.yearsOfExperience} 年经验
+							{INFO.yearsOfExperience}年经验
 						</p>
 					</div>
 					<p className="flex flex-wrap gap-x-5 font-mono text-[13px]">

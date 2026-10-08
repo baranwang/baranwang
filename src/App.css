@@ -12,6 +12,8 @@
 html {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
+	/* Spaces between CJK and Latin text come from the browser, not the copy. */
+	text-autospace: normal;
 }
 
 .resume-paper {
