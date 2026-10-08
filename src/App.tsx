@@ -1,6 +1,5 @@
 import "./App.css";
 
-import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { MDXContent } from "./components/mdx-content";
 import { Section } from "./components/section";
@@ -183,8 +182,6 @@ const App = () => {
 						))}
 					</div>
 				</Section>
-
-				<Footer />
 			</main>
 
 			<div className="print:hidden">
@@ -193,7 +190,7 @@ const App = () => {
 					href="/resume.pdf"
 					download={`${INFO.name.zh}-${INFO.role.replace(/\s/g, "").replace("/", "-")}.pdf`}
 				>
-					❯ download resume.pdf
+					$ download resume.pdf
 				</a>
 				<div className="h-16" />
 			</div>

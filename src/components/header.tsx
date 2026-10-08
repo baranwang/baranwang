@@ -13,7 +13,7 @@ export const Header = () => {
 				<div className="space-y-5 pb-10">
 					<p className="font-mono text-stone-400 text-xs">
 						<span className="text-accent">~/baran</span>
-						<span className="mx-1.5 text-emerald-600">❯</span>
+						<span className="mx-1.5 text-emerald-600">$</span>
 						whoami
 					</p>
 					<h1 className="font-semibold text-5xl text-stone-900 tracking-tight">

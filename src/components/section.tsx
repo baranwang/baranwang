@@ -18,7 +18,7 @@ export const Section: React.FC<SectionProps> = ({
 			<header className="space-y-1">
 				<p className="font-mono text-stone-400 text-xs">
 					<span className="text-accent">~/baran</span>
-					<span className="mx-1.5 text-emerald-600">❯</span>
+					<span className="mx-1.5 text-emerald-600">$</span>
 					{command}
 				</p>
 				<h2 className="font-semibold text-stone-900 text-xl tracking-tight">
