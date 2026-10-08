@@ -9,7 +9,7 @@ export const Tag: React.FC<TagProps> = ({ children, className }) => {
 	return (
 		<span
 			className={cn(
-				"rounded bg-white/60 px-2 py-0.5 font-semibold text-stone-900 text-xs",
+				"rounded-md border border-stone-200 bg-stone-50 px-1.5 font-mono text-[11px] text-stone-500 leading-5",
 				className,
 			)}
 		>

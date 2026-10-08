@@ -1,107 +1,202 @@
 import "./App.css";
 
-import { Fragment } from "react";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { MDXContent } from "./components/mdx-content";
 import { Section } from "./components/section";
 import { Tag } from "./components/tag";
 import { INFO } from "./info";
-import profile from "./info/profile.mdx";
 import skills from "./info/skills.mdx";
 import { cn } from "./libs";
 
+const EDUCATION = [
+	{
+		duration: "2026 ～ 2028",
+		school: "上海开放大学",
+		major: "人工智能",
+		degree: "本科 · 在读",
+	},
+	{
+		duration: "2011 ～ 2014",
+		school: "平顶山学院",
+		major: "艺术设计",
+		degree: "专科",
+	},
+];
+
+const Tags = ({ tags }: { tags?: string[] }) =>
+	tags?.length ? (
+		<div className="flex flex-wrap gap-1.5">
+			{tags.map((tag) => (
+				<Tag key={tag}>{tag}</Tag>
+			))}
+		</div>
+	) : null;
+
+/** Groups in order of first appearance, so the sort order of items decides the order of groups. */
+const groupBy = <T,>(items: T[], keyOf: (item: T) => string) => {
+	const groups = new Map<string, T[]>();
+	for (const item of items) {
+		const key = keyOf(item);
+		groups.set(key, [...(groups.get(key) ?? []), item]);
+	}
+	return [...groups];
+};
+
+const repoPath = (href: string) => href.replace(/^https:\/\/github\.com\//, "");
+
 const App = () => {
 	return (
-		<div className="relative w-full bg-stone-900 text-white">
-			<Header />
+		<div className="resume-paper min-h-screen w-full font-sans text-stone-700">
+			<main className="mx-auto w-full max-w-3xl space-y-14 px-6 py-14 md:px-12">
+				<Header />
 
-			<main className="relative z-10 mx-auto w-full space-y-14 px-10 py-14 font-light md:max-w-3xl">
-				<section className="flex flex-col gap-2">
-					我是
-					<div className="font-semibold text-2xl">
-						{INFO.name.zh} / {INFO.name.en}
-					</div>
-					<MDXContent content={profile} />
-					<div className="mt-4 flex flex-wrap gap-2">
-						<a href={`mailto:${INFO.email}`}>📧 {INFO.email}</a>
-					</div>
-				</section>
+				<Section title="工作经历" command="git log --graph --career">
+					<ol className="relative space-y-7 border-stone-200 border-l pl-6">
+						{INFO.workExperience.map((item, index) => (
+							<li key={item.key} className="relative space-y-2">
+								<span
+									className={cn(
+										"-left-[1.97rem] absolute top-1.5 size-3 rounded-full border-2 border-white ring-1",
+										index === 0
+											? "bg-accent ring-accent"
+											: "bg-stone-300 ring-stone-300",
+									)}
+								/>
+								<div className="flex flex-wrap items-baseline justify-between gap-x-4">
+									<h3 className="font-semibold text-stone-900">
+										{item.company}
+										<span className="mx-2 text-stone-300">/</span>
+										<span className="font-normal text-stone-600">
+											{item.title}
+										</span>
+										{item.tag ? (
+											<Tag className="ml-2 align-middle">{item.tag}</Tag>
+										) : null}
+									</h3>
+									<time className="font-mono text-stone-400 text-xs tabular-nums">
+										{item.duration}
+									</time>
+								</div>
+								<MDXContent content={item.default} />
+							</li>
+						))}
+					</ol>
+				</Section>
 
-				<Section title="专业技能">
+				<Section title="重点项目" command="ls projects/">
+					<div className="space-y-10">
+						{INFO.projectExperience.map((item) => (
+							<article key={item.key} className="space-y-2.5">
+								<div className="flex flex-wrap items-baseline justify-between gap-x-4">
+									<h3 className="font-semibold text-stone-900">{item.title}</h3>
+									{item.team ? (
+										<span className="font-mono text-stone-400 text-xs">
+											{item.team}
+										</span>
+									) : null}
+								</div>
+								<Tags tags={item.tags} />
+								<MDXContent content={item.default} />
+							</article>
+						))}
+					</div>
+				</Section>
+
+				<Section title="开源作品" command="gh repo list --sort stars">
+					<div className="space-y-8">
+						{groupBy(INFO.openSource, (item) => item.category).map(
+							([category, items]) => (
+								<div key={category} className="space-y-3">
+									<h3 className="font-mono text-stone-400 text-xs">
+										<span className="text-accent"># </span>
+										{category}
+									</h3>
+									<div className="grid gap-3 md:grid-cols-2">
+										{items.map((item) => (
+											<article
+												key={item.key}
+												className={cn(
+													"flex flex-col gap-2.5 rounded-xl border border-stone-200 bg-white p-4",
+													{ "md:col-span-2": item.featured },
+												)}
+											>
+												<div className="space-y-0.5">
+													<div className="flex flex-wrap items-baseline justify-between gap-x-3">
+														<h3 className="font-semibold text-stone-900">
+															<a
+																className="hover:text-accent"
+																href={item.href}
+																target="_blank"
+																rel="noopener noreferrer"
+															>
+																{item.title}
+															</a>
+														</h3>
+														<span className="font-mono text-accent text-xs tabular-nums">
+															{item.meta}
+														</span>
+													</div>
+													<p className="font-mono text-[11px] text-stone-400">
+														{repoPath(item.href)}
+													</p>
+												</div>
+												<MDXContent
+													content={item.default}
+													className={cn("flex-1", {
+														"text-sm leading-6": !item.featured,
+													})}
+												/>
+												<Tags tags={item.tags} />
+											</article>
+										))}
+									</div>
+								</div>
+							),
+						)}
+					</div>
+				</Section>
+
+				<Section title="核心能力" command="cat skills.md">
 					<MDXContent content={skills} />
 				</Section>
 
-				<Section title="工作履历">
-					{INFO.workExperience.map((item, index, array) => {
-						return (
-							<Fragment key={item.key}>
-								<div className="flex items-center justify-between">
-									<h3 className="font-bold">
-										{item.company} · {item.title} {item.tag ? <span className="ml-1 font-light text-white/50">{item.tag}</span> : null}
-									</h3>
-									<time>{item.duration}</time>
-								</div>
-								<MDXContent content={item.default} />
-								{index !== array.length - 1 && (
-									<hr className="my-4 border-white/10" />
-								)}
-							</Fragment>
-						);
-					})}
+				<Section title="教育经历" command="cat education.md">
+					<div className="space-y-2">
+						{EDUCATION.map((item) => (
+							<div
+								key={item.school}
+								className="flex flex-wrap items-baseline justify-between gap-x-4"
+							>
+								<p>
+									<span className="font-semibold text-stone-900">
+										{item.school}
+									</span>
+									<span className="mx-2 text-stone-300">/</span>
+									{item.major}
+									<Tag className="ml-2 align-middle">{item.degree}</Tag>
+								</p>
+								<time className="font-mono text-stone-400 text-xs tabular-nums">
+									{item.duration}
+								</time>
+							</div>
+						))}
+					</div>
 				</Section>
 
-				<Section title="教育经历">
-					<p>
-						2026 ～ 2028 · 上海开放大学 · 人工智能
-						<Tag className="ml-2">本科 · 在读</Tag>
-					</p>
-					<p>
-						2011 ～ 2014 · 平顶山学院 · 艺术设计
-						<Tag className="ml-2">专科</Tag>
-					</p>
-				</Section>
-
-				<Section title="项目经历">
-					{INFO.projectExperience.map((item, index, array) => {
-						return (
-							<Fragment key={item.key}>
-								<h3 className="flex items-start justify-between">
-									<span className="font-bold">{item.title}</span>
-									{item.team ? <span className="whitespace-nowrap">{item.team}</span> : null}
-								</h3>
-								<div
-									className={cn("my-2 flex flex-wrap items-center gap-2", {
-										hidden: !item.tags?.length,
-									})}
-								>
-									{item.tags?.map((tag) => (
-										<Tag key={tag}>{tag}</Tag>
-									))}
-								</div>
-								<MDXContent content={item.default} />
-								{index !== array.length - 1 && (
-									<hr className="my-4 border-white/10" />
-								)}
-							</Fragment>
-						);
-					})}
-				</Section>
+				<Footer />
 			</main>
 
 			<div className="print:hidden">
 				<a
-					className="-translate-x-1/2 fixed bottom-8 left-1/2 z-50 min-w-xs cursor-pointer rounded-md bg-white/10 px-4 py-2 text-center shadow-md backdrop-blur-lg"
-					type="button"
+					className="-translate-x-1/2 fixed bottom-6 left-1/2 z-40 rounded-full bg-stone-900 px-5 py-2 font-mono text-white text-xs shadow-lg transition hover:bg-accent"
 					href="/resume.pdf"
-					download={`${INFO.name.zh}-${INFO.email}.pdf`}
+					download={`${INFO.name.zh}-${INFO.role.replace(/\s/g, "").replace("/", "-")}.pdf`}
 				>
-					下载 PDF
+					❯ download resume.pdf
 				</a>
-				<div className="h-24" />
+				<div className="h-16" />
 			</div>
-
-			<Footer />
 		</div>
 	);
 };

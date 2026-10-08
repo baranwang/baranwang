@@ -18,12 +18,10 @@ export const INFO = {
 		zh: "王柄涵",
 		en: "Baran",
 	},
+	role: "全栈工程师",
 	email: "me@baran.wang",
-	birthDate: new Date("1993-05-01T12:40:00.000+08:00"),
+	github: "baranwang",
 	careerStartDate: new Date("2014-08-18T00:00:00.000+08:00"),
-	get age() {
-		return differenceInYears(new Date(), this.birthDate);
-	},
 	get yearsOfExperience() {
 		return differenceInYears(new Date(), this.careerStartDate);
 	},
@@ -52,5 +50,19 @@ export const INFO = {
 		}>(
 			import.meta.webpackContext("./project-experience", { regExp: /\.mdx$/ }),
 		).sort((a, b) => a.order - b.order);
+	},
+	get openSource() {
+		return loadContext<{
+			title: string;
+			href: string;
+			meta: string;
+			category: string;
+			featured?: boolean;
+			tags?: string[];
+			order: number;
+			default: () => React.JSX.Element;
+		}>(import.meta.webpackContext("./open-source", { regExp: /\.mdx$/ })).sort(
+			(a, b) => a.order - b.order,
+		);
 	},
 };

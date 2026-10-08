@@ -1,47 +1,51 @@
-import { Suspense, use } from "react";
-import { createHighlighterCore } from "shiki/bundle/web";
-import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
-
 import { INFO } from "@/info";
+import profile from "@/info/profile.mdx";
+import { Avatar } from "./avatar";
+import { MDXContent } from "./mdx-content";
 
-const codeToHtml = async (code: string) => {
-	const highlighter = await createHighlighterCore({
-		langs: [import("shiki/langs/javascript.mjs")],
-		themes: [import("shiki/themes/vitesse-black.mjs")],
-		engine: createJavaScriptRegexEngine(),
-	});
-	return highlighter.codeToHtml(code, {
-		lang: "javascript",
-		theme: "vitesse-black",
-	});
-};
-const code = `export class BaranWang {
-  static name = '${INFO.name.zh}';
-
-  static birthday = new Date('${INFO.birthDate.toLocaleString()}');
-
-  sendEmail() {
-    return 'mailto:${INFO.email}';
-  }
-}`;
-
-const CodeBlock = () => {
-	const codeHtml = use(codeToHtml(code));
-	return (
-		<div
-			className="absolute top-9 right-4 hidden font-mono opacity-30 md:block [&_.shiki]:bg-transparent!"
-			// biome-ignore lint/security/noDangerouslySetInnerHtml: 渲染代码块
-			dangerouslySetInnerHTML={{ __html: codeHtml }}
-		/>
-	);
-};
+const LINK_CLASS =
+	"text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent";
 
 export const Header = () => {
 	return (
-		<header className="resume-ambient absolute top-0 right-0 left-0 z-0 h-[42rem] overflow-hidden">
-			<Suspense fallback={null}>
-				<CodeBlock />
-			</Suspense>
+		<header className="space-y-8">
+			<div className="grid items-end gap-x-8 border-stone-300 border-b md:grid-cols-[1fr_17rem]">
+				<div className="space-y-5 pb-10">
+					<p className="font-mono text-stone-400 text-xs">
+						<span className="text-accent">~/baran</span>
+						<span className="mx-1.5 text-emerald-600">❯</span>
+						whoami
+					</p>
+					<h1 className="font-semibold text-5xl text-stone-900 tracking-tight">
+						{INFO.name.zh}
+						<span className="ml-3 font-light font-mono text-3xl text-stone-300">
+							{INFO.name.en}
+						</span>
+					</h1>
+					<div className="space-y-2">
+						<p className="font-medium text-stone-800 text-xl">{INFO.role}</p>
+						<p className="text-sm text-stone-500">
+							{INFO.yearsOfExperience} 年经验
+						</p>
+					</div>
+					<p className="flex flex-wrap gap-x-5 font-mono text-[13px]">
+						<a className={LINK_CLASS} href={`mailto:${INFO.email}`}>
+							{INFO.email}
+						</a>
+						<a
+							className={LINK_CLASS}
+							href={`https://github.com/${INFO.github}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							github.com/{INFO.github}
+						</a>
+					</p>
+				</div>
+				<Avatar />
+			</div>
+
+			<MDXContent content={profile} />
 		</header>
 	);
 };
